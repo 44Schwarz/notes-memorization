@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notes</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 60%;
+    }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <h2>Notes manager</h2>
+  <form action="add_note/" method="post">
+    {% csrf_token %}
+    <input type="text" name="new_note" placeholder="Enter something" />
+    <br>
+    <br>
+    <input type="submit" value="Add a note" />
+  </form>
+  <br>
+  <br>
+  {% if notes %}
+  <h4>Notes:</h4>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Text</th>
+        <th>Project</th>
+        <th>Labels</th>
+      </tr>
+      {% for note in notes %}
+        <tr>
+          <td>{{ note.id }}</td>
+          <td>{{ note.text }}</td>
+          <td>{{ note.project }}</td>
+          <td></td>
+        </tr>
+      {% endfor %}
+      </table>
+    <!--<ol>-->
+      <!--{% for note in notes %}-->
+        <!--<li>{{ note.text }} (Project: {{ note.project }})</li>-->
+      <!--{% endfor %}-->
+    <!--</ol>-->
+  {% else %}
+    <p>No notes are available</p>
+  {% endif %}
+</body>
+</html>
