@@ -14,5 +14,5 @@ old_proj_dbe
 __pycache__
 *.csv
 venv_notes/
-idea/
+.idea/
 credentials.py
