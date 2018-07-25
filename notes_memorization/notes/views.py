@@ -25,3 +25,8 @@ def add_note(request):
         return HttpResponse(text)
     except:
         return HttpResponse('Error', status=404)
+
+
+def detail(request, note_id):
+    note = Note.objects.get(pk=note_id)
+    return render(request, 'notes/detail.html', context={'note': note})

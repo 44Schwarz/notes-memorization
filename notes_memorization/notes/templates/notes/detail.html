@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Note #{{ note.id }}</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'notes/index.css' %}" />
+</head>
+<body>
+  <h3>Note #{{ note.id }}</h3>
+  <table>
+    <tr>
+      <th>Text</th>
+      <th>Project</th>
+      <th>Labels</th>
+      <th>Reviews number</th>
+    </tr>
+    <tr>
+      <td>{{ note.text }}</td>
+      <td>{{ note.project }}</td>
+      <td></td>
+      <td>{{ note.reviews_number }}</td>
+    </tr>
+  </table>
+
+</body>
+</html>
