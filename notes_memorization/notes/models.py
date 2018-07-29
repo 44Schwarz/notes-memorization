@@ -21,7 +21,9 @@ class Note(models.Model):
     labels = models.ManyToManyField(Label)
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     date_added = models.DateTimeField()
-    review_counter = models.IntegerField(default=0)
+    reviews_counter = models.IntegerField(default=0)
+    link_url = models.URLField(default='')
+    link_file = models.FileField(default=None, null=True)
 
     def __str__(self):
         return '{} — {}'.format(self.text[:100], self.project)

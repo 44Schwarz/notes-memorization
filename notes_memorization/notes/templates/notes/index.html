@@ -9,10 +9,10 @@
 <body>
   <h2>Notes manager</h2>
 
-  <form action="add_note/" method="post" id="newNote">
+  <form action="add_note/" method="POST" id="newNote" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="note_text">Enter your note</label>
-    <input type="text" name="new_note" placeholder="Some text" id="note_text" />
+    <input type="text" name="new_note" placeholder="Some text" id="note_text" autocomplete="off"/>
     <br>
     <br>
     <label for="project_select">Select project</label>
@@ -21,6 +21,9 @@
         <option value="{{ proj.id }}">{{ proj }}</option>
       {% endfor %}
     </select>
+    <br>
+    <br>
+    <input type="file" />
     <br>
     <br>
     <button type="submit">Add a note</button>

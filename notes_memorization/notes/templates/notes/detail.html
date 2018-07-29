@@ -7,19 +7,22 @@
   <link rel="stylesheet" type="text/css" href="{% static 'notes/index.css' %}" />
 </head>
 <body>
+  <a href="{% url 'notes:index' %}">All notes</a>
   <h3>Note #{{ note.id }}</h3>
   <table>
     <tr>
       <th>Text</th>
       <th>Project</th>
       <th>Labels</th>
+      <th>Attachments</th>
       <th>Reviews number</th>
     </tr>
     <tr>
       <td>{{ note.text }}</td>
       <td>{{ note.project }}</td>
       <td></td>
-      <td>{{ note.reviews_number }}</td>
+      <td>{{ note.link_file }}</td>
+      <td>{{ note.reviews_counter }}</td>
     </tr>
   </table>
 

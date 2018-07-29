@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Label, Note, Project
 from django.views.decorators.http import require_http_methods
@@ -28,5 +28,5 @@ def add_note(request):
 
 
 def detail(request, note_id):
-    note = Note.objects.get(pk=note_id)
+    note = get_object_or_404(Note, pk=note_id)
     return render(request, 'notes/detail.html', context={'note': note})
