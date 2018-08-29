@@ -8,126 +8,45 @@
 {% block content %}
   <link rel="stylesheet" type="text/css" href="{% static 'notes/index.css' %}" />
   <div class="container" style="width: 65%">
-    <div class="row">
+    <div class="row mt-3">
+      <div class="col-sm">
+        <button class="btn btn-primary" onclick="location.href='/notes/review'">Review</button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
       <div class="col-sm">
         <h2>Notes manager</h2>
 
-        <form action="add_note/" method="post" id="newNote">
+        <form action="add_note/" method="POST" id="newNote" enctype="multipart/form-data">
           {% csrf_token %}
           <label for="note_text">Enter your note</label>
-          <input type="text" name="new_note" placeholder="Some text" id="note_text" />
+          <input type="text" name="new_note" placeholder="Some text" id="note_text" autocomplete="off"/>
           <br>
           <br>
           <label for="project_select">Select project</label>
           <select name="project_id" id="project_select">
             {% for proj in projects %}
-            <option value="{{ proj.id }}">{{ proj }}</option>
+              <option value="{{ proj.id }}">{{ proj }}</option>
             {% endfor %}
           </select>
           <br>
           <br>
-          <button type="submit">Add a note</button>
+          <input type="file" />
+          <br>
+          <br>
+          <button class="btn btn-outline-dark" type="submit">Add a note</button>
         </form>
-        <br>
-        <br>
+      </div>
+    </div>
 
-<!--<<<<<<< Updated upstream-->
-  <!--<form action="add_note/" method="POST" id="newNote" enctype="multipart/form-data">-->
-    <!--{% csrf_token %}-->
-    <!--<label for="note_text">Enter your note</label>-->
-    <!--<input type="text" name="new_note" placeholder="Some text" id="note_text" autocomplete="off"/>-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<label for="project_select">Select project</label>-->
-    <!--<select name="project_id" id="project_select">-->
-      <!--{% for proj in projects %}-->
-        <!--<option value="{{ proj.id }}">{{ proj }}</option>-->
-      <!--{% endfor %}-->
-    <!--</select>-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<input type="file" />-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<button type="submit">Add a note</button>-->
-  <!--</form>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--{% if notes %}-->
-  <!--<h4>Notes:</h4>-->
-    <!--<table>-->
-      <!--<tr>-->
-        <!--<th>Id</th>-->
-        <!--<th>Text</th>-->
-        <!--<th>Project</th>-->
-        <!--<th>Labels</th>-->
-      <!--</tr>-->
-      <!--{% for note in notes %}-->
-        <!--<tr>-->
-          <!--<td><a href="{% url 'notes:detail' note.id %}">{{ note.id }}</a></td>-->
-          <!--<td>{{ note.text }}</td>-->
-          <!--<td>{{ note.project }}</td>-->
-          <!--<td></td>-->
-        <!--</tr>-->
-      <!--{% endfor %}-->
-      <!--</table>-->
-  <!--{% else %}-->
-    <!--<p>No notes are available</p>-->
-  <!--{% endif %}-->
-<!--</body>-->
-<!--</html>-->
-<!--=======-->
-<!--<<<<<<< Updated upstream-->
-  <!--<form action="add_note/" method="POST" id="newNote" enctype="multipart/form-data">-->
-    <!--{% csrf_token %}-->
-    <!--<label for="note_text">Enter your note</label>-->
-    <!--<input type="text" name="new_note" placeholder="Some text" id="note_text" autocomplete="off"/>-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<label for="project_select">Select project</label>-->
-    <!--<select name="project_id" id="project_select">-->
-      <!--{% for proj in projects %}-->
-        <!--<option value="{{ proj.id }}">{{ proj }}</option>-->
-      <!--{% endfor %}-->
-    <!--</select>-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<input type="file" />-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--<button type="submit">Add a note</button>-->
-  <!--</form>-->
-  <!--<br>-->
-  <!--<br>-->
-  <!--{% if notes %}-->
-  <!--<h4>Notes:</h4>-->
-    <!--<table>-->
-      <!--<tr>-->
-        <!--<th>Id</th>-->
-        <!--<th>Text</th>-->
-        <!--<th>Project</th>-->
-        <!--<th>Labels</th>-->
-      <!--</tr>-->
-      <!--{% for note in notes %}-->
-        <!--<tr>-->
-          <!--<td><a href="{% url 'notes:detail' note.id %}">{{ note.id }}</a></td>-->
-          <!--<td>{{ note.text }}</td>-->
-          <!--<td>{{ note.project }}</td>-->
-          <!--<td></td>-->
-        <!--</tr>-->
-      <!--{% endfor %}-->
-      <!--</table>-->
-  <!--{% else %}-->
-    <!--<p>No notes are available</p>-->
-  <!--{% endif %}-->
-<!--</body>-->
-<!--</html>-->
-<!--=======-->
+    <div class="row mt-3">
+      <div class="col-sm">
         {% if notes %}
           <h4>Notes:</h4>
           <table class="table">
             <tr>
-              <th>Id</th>
+              <th>#</th>
               <th>Text</th>
               <th>Project</th>
               <th>Labels</th>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+  Review
+{% endblock %}
+
+{% block content %}
+  <div class="container" style="width: 65%">
+    <div class="row">
+      <div class="col-sm">
+        <p id="note">{{ note }}</p>
+        <input id="noteId" value="{{ note.id }}" >
+        <button class="btn btn-success" onclick="getNextNote()">Next note</button>
+        <button class="btn btn-success" onclick="getRandomNote()">Random note</button>
+        <button class="btn btn-danger" onclick="location.href='/notes'">Finish review</button>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function getNextNote() {
+      $.ajax({
+        type: "GET",
+        url: "#",
+        data: {'cur_id': $('#noteId').val()},
+        success: function (data) {
+          $('#note').text(data['note']);
+          $('#noteId').val(data['note_id']);
+        }
+      });
+    }
+
+    function getRandomNote() {
+      $.ajax({
+        type: "GET",
+        url: "#",
+        success: function (data) {
+          location.reload();
+        }
+      });
+    }
+  </script>
+{% endblock %}
