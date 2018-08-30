@@ -16,3 +16,4 @@ __pycache__
 venv_notes/
 .idea/
 credentials.py
+*.xml

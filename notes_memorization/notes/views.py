@@ -1,4 +1,7 @@
 from random import randint
+import csv
+from lxml import etree
+
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, JsonResponse
@@ -54,3 +57,30 @@ def review(request):
         obj.reviews_counter += 1
         obj.save()
         return render(request, 'notes/review.html', context={'note': obj})
+
+
+def download(request):
+    try:
+        notes = Note.objects.all()
+        if request.GET.get('type') == 'csv':
+            with open('notes.csv', 'w') as f:
+                note_writer = csv.writer(f)
+                note_writer.writerow(['ID', 'Text', 'Project', 'Date added', '# of reviews', 'Url', 'File'])
+                for note in notes:
+                    note_writer.writerow([note.id, note.text, note.project, note.date_added,
+                                          note.reviews_counter, note.link_url, note.link_file])
+
+        elif request.GET.get('type') == 'xml':
+            root = etree.Element('notes')
+
+            for note in notes:
+                n = etree.SubElement(root, 'note')
+
+                for attr in ('id', 'text', 'project', 'date_added', 'reviews_counter', 'link_url', 'link_file'):
+                    etree.SubElement(n, attr).text = str(note.__getattribute__(attr))
+
+            etree.ElementTree(root).write('notes.xml', pretty_print=True, xml_declaration=True, encoding='UTF-8')
+    except Exception as e:
+        return JsonResponse({'result': e})
+    else:
+        return JsonResponse({'result': True})

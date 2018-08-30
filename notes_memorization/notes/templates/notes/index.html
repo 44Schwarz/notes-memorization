@@ -6,11 +6,12 @@
 {% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" type="text/css" href="{% static 'notes/index.css' %}" />
   <div class="container" style="width: 65%">
     <div class="row mt-3">
       <div class="col-sm">
         <button class="btn btn-primary" onclick="location.href='/notes/review'">Review</button>
+        <button class="btn btn-dark" onclick="exp_data('csv')">Export in csv</button>
+        <button class="btn btn-dark" onclick="exp_data('xml')">Export in xml</button>
       </div>
     </div>
 
@@ -44,7 +45,7 @@
       <div class="col-sm">
         {% if notes %}
           <h4>Notes:</h4>
-          <table class="table">
+          <table class="table table-light table-hover">
             <tr>
               <th>#</th>
               <th>Text</th>
@@ -66,4 +67,17 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function exp_data(type) {
+      $.ajax({
+        type: "GET",
+        url: "download/",
+        data: {'type': type},
+        success: function(data) {
+
+        }
+      });
+    }
+  </script>
 {% endblock %}
